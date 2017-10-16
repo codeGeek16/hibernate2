@@ -8,25 +8,46 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
+
 
 /*import com.galaxe.pojo.Address;*/
 import com.galaxe.pojo.Employee;
 
 public class ManageEmployee {
    private static SessionFactory factory; 
+   
+/*   public static SessionFactory getSessionFactory() {
+       if (factory == null) {
+           Configuration configuration = new Configuration().configure();
+           StandardServiceRegistryBuilder registry = new StandardServiceRegistryBuilder();
+           registry.applySettings(configuration.getProperties());
+           MetadataSources metadataSources = new MetadataSources();
+           metadataSources.addAnnotatedClass(Employee.class);
+           Metadata metadata = metadataSources.buildMetadata(registry.build());
+           factory = metadata.buildSessionFactory();           
+       }
+        
+       return factory;//after this put hibernat.cfg.xml directly under src folder
+   }*/
+   
    public static void main(String[] args) {
       
       try {
-    	  /*Configuration config = new Configuration();
-    	  File f = new File("hibernate.cfg.xml");
+    	 Configuration config = new Configuration();
+    	 
+    	  File f = new File("HIbernate1/hibernate.cfg.xml");
     	  config.configure(f);
-    	  ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();*/
-    	  Configuration config = new Configuration();
+    	  config.addAnnotatedClass(Employee.class);
+    	  ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
+    	  /*Configuration config = new Configuration();*/
     	 //config.configure("D:/eclipse/practice/HIbernate1/hibernate.cfg.xml");
-         factory = config.buildSessionFactory();
+         factory = config.buildSessionFactory(serviceRegistry);
          
       } catch (Throwable ex) { 
          System.err.println("Failed to create sessionFactory object." + ex);

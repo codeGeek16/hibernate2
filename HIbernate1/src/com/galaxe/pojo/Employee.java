@@ -1,17 +1,24 @@
 package com.galaxe.pojo;
 
-import java.util.*;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GeneratorType;
 
 @Entity
 public class Employee{
 	@Id
-   private int id;
-   private String firstName; 
-   private String lastName;   
-   private int salary;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column
+	private String firstName; 
+	@Column
+	private String lastName;
+	@Column
+	private int salary;
    /*private Address address;*/
 
    public Employee() {}
