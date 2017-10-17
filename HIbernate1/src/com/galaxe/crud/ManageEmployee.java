@@ -14,8 +14,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-
-
+import com.galaxe.pojo.Address;
 /*import com.galaxe.pojo.Address;*/
 import com.galaxe.pojo.Employee;
 
@@ -41,10 +40,12 @@ public class ManageEmployee {
       try {
     	 Configuration config = new Configuration();
     	 
-    	  File f = new File("HIbernate1/hibernate.cfg.xml");
+    	  File f = new File("hibernate.cfg.xml");
     	  config.configure(f);
     	  config.addAnnotatedClass(Employee.class);
+    	  config.addAnnotatedClass(Address.class);
     	  ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
+    	
     	  /*Configuration config = new Configuration();*/
     	 //config.configure("D:/eclipse/practice/HIbernate1/hibernate.cfg.xml");
          factory = config.buildSessionFactory(serviceRegistry);
@@ -57,13 +58,16 @@ public class ManageEmployee {
       ManageEmployee ME = new ManageEmployee();
 
       /* Let us have one address object */
-      /*Address address = ME.addAddress("Kondapur","Hyderabad","AP","532");*/
+      Address address = ME.addAddress("Kondapur","Hyderabad","AP","532");
 
       /* Add employee records in the database */
-      Integer empID1 = ME.addEmployee("Manoj", "Kumar", 4000);
+      Integer empID1 = ME.addEmployee("Manoj", "Kumar", 4000,address);
 
+      /* Let us have one address object */
+      Address address2 = ME.addAddress("BCS","Shimla","HP","648");
+      
       /* Add another employee record in the database */
-      Integer empID2 = ME.addEmployee("Dilip", "Kumar", 3000);
+      Integer empID2 = ME.addEmployee("Dilip", "Kumar", 3000,address2);
 
       /* List down all the employees */
      /* ME.listEmployees();
@@ -80,7 +84,7 @@ public class ManageEmployee {
    }
 
    /* Method to add an address record in the database */
-   /*public Address addAddress(String street, String city, String state, String zipcode) {
+   public Address addAddress(String street, String city, String state, String zipcode) {
       Session session = factory.openSession();
       Transaction tx = null;
       Integer addressID = null;
@@ -99,16 +103,16 @@ public class ManageEmployee {
       }
       return address;
    }
-*/
+
    /* Method to add an employee record in the database */
-   public Integer addEmployee(String fname, String lname, int salary){
+   public Integer addEmployee(String fname, String lname, int salary,Address addr){
       Session session = factory.openSession();
       Transaction tx = null;
       Integer employeeID = null;
       
       try {
          tx = session.beginTransaction();
-         Employee employee = new Employee(fname, lname, salary);
+         Employee employee = new Employee(fname, lname, salary,addr);
          employeeID = (Integer) session.save(employee); 
          tx.commit();
       } catch (HibernateException e) {
