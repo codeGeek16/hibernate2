@@ -19,15 +19,15 @@ public class Employee{
 	private String lastName;
 	@Column
 	private int salary;
-   /*private Address address;*/
+   private Address address;
 
    public Employee() {}
    
-   public Employee(String fname, String lname, int salary ) {
+   public Employee(String fname, String lname, int salary ,Address address) {
       this.firstName = fname;
       this.lastName = lname;
       this.salary = salary;
-     /* this.address = address;*/
+      this.address = address;
    }
    
    public int getId() {
@@ -62,11 +62,11 @@ public class Employee{
       this.salary = salary;
    }
 
-   /*public Address getAddress() {
+   public Address getAddress() {
       return address;
    }
    
    public void setAddress( Address address ) {
       this.address = address;
-   }*/
+   }
 }
