@@ -1,24 +1,13 @@
 package com.galaxe.pojo;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.*;
 
-@Entity
 public class Address{
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-   @Column
-   private String street;
-   @Column
-   private String city;
-   @Column
-   private String state;
-   @Column
+   private int id;
+   private String street;     
+   private String city;     
+   private String state;    
    private String zipcode; 
 
    public Address() {}

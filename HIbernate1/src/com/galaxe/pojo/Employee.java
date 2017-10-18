@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GeneratorType;
 
@@ -20,32 +19,15 @@ public class Employee{
 	private String lastName;
 	@Column
 	private int salary;
-	@ManyToOne 
-	private Address addr;
-   /*private Address address;*/
+   private Address address;
 
-   @Override
-	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", salary=" + salary
-				+ ", addr=" + addr + "]";
-	}
-
-public Employee() {}
+   public Employee() {}
    
-   public Address getAddr() {
-	return addr;
-}
-
-public void setAddr(Address addr) {
-	this.addr = addr;
-}
-
-public Employee(String fname, String lname, int salary,Address addr) {
+   public Employee(String fname, String lname, int salary ,Address address) {
       this.firstName = fname;
       this.lastName = lname;
       this.salary = salary;
-      this.addr = addr;
-     /* this.address = address;*/
+      this.address = address;
    }
    
    public int getId() {
@@ -80,11 +62,11 @@ public Employee(String fname, String lname, int salary,Address addr) {
       this.salary = salary;
    }
 
-   /*public Address getAddress() {
+   public Address getAddress() {
       return address;
    }
    
    public void setAddress( Address address ) {
       this.address = address;
-   }*/
+   }
 }
